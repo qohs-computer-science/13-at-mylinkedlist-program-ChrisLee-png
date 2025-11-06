@@ -1,3 +1,9 @@
+/*
+*MyLinkedList.java
+*Data structure with properties similar to the Java LinkedList, but is a singly-linkedlist.
+*/
+
+
 public class MyLinkedList
 {
     private ListNode head;
@@ -6,27 +12,32 @@ public class MyLinkedList
 	{
 		head = null; 
 		size = 0;
-	} // end Constructor
+	}// end Constructor
     public int size()
     {
     return size;
-    }
+    }//end size method
     public boolean isEmpty()
     {
     return (size==0);
-    }
+    }//end isEmpty method
     public String toString()
     {
-    int index=0; 
-    ListNode temp = head;
-    String r = "";
-    while(temp!=null){
-        r+= (index + " " + (temp.getValue())+"\n");
-	    temp = temp.getNext();
-	    index++;
-    }
+        String r = "Empty list";
+        if(!isEmpty())
+        {
+            r="";
+            int index=0; 
+            ListNode temp = head;
+            while(temp!=null)
+            {
+                r+= (index + ": " + (temp.getValue())+"\n");
+	            temp = temp.getNext();
+	            index++;
+            }
+        }
     return r;
-    }
+    }//end toString method
     public boolean add(Object newItem){
         ListNode temp = head;
         if(!isEmpty()){
@@ -34,32 +45,33 @@ public class MyLinkedList
             {
                 temp=temp.getNext();
             }
-            temp.setNext((ListNode)newItem);
+            temp.setNext(new ListNode(newItem, null));
         }
         else
         {
-            head = (ListNode)newItem;
+            head = new ListNode(newItem, null);
         }
         size+=1;
         return true;
-    }
+    }//end add method
     public boolean addFirst(Object newItem){
         if(!isEmpty()){
-            ((ListNode)newItem).setNext(head);
-            head = (ListNode)newItem;
+            ListNode e = new ListNode(newItem, null);
+            e.setNext(head);
+            head = e;
         }
         else
         {
-            head = ((ListNode)newItem);
+            head = new ListNode(newItem, null);
         }
         size+=1;
         return true;
-    }
+    }//end addFirst method
     public boolean addLast(Object newItem)
     {
         return add(newItem);
         
-    }
+    }//end addLast method
     public Object get(int i)
     {
         int e=0; 
@@ -74,9 +86,10 @@ public class MyLinkedList
                 e++;
             }
         }
-        return "Value at index " + e + ": " + temp.getValue();
+        size+=1;
+        return temp.getValue();
 
-    }
+    }//end get method
     public Object set(int i, Object newValue)
     {
         int e=0; 
@@ -93,9 +106,9 @@ public class MyLinkedList
         }
         Object r = temp.getValue();
         temp.setValue(newValue);
-        return "Done, old value at " + e+ ": "+r;
+        return r;
 
-    }
+    }//end set method
     public Object remove(int i)
     {
         int e=0; 
@@ -111,10 +124,30 @@ public class MyLinkedList
             }
         }
         ListNode r = temp;
-        temp.setValue(temp.getNext());
+        temp = temp.getNext();
         r.setNext(temp.getNext());
         temp.setNext(null);
+        size--;
         return temp.getValue();
-    }
-
-}
+    }//end removeLast method
+    public Object removeFirst()
+    {
+        ListNode temp = head;
+        temp.setNext(null);
+        head = head.getNext();
+        size--;
+        return temp.getValue();
+    }//end removeLast method
+    public Object removeLast()
+    {
+        ListNode temp = head;
+        while(temp.getNext().getNext()!=null)
+            {
+                temp=temp.getNext();
+            }
+        ListNode enz = temp;
+        temp.setNext(null);
+        size--;
+        return enz.getValue();
+    }//end removeLast method
+}//end class
