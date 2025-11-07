@@ -34,8 +34,8 @@ public class MyLinkedList
                 r+= (index + ": " + (temp.getValue())+"\n");
 	            temp = temp.getNext();
 	            index++;
-            }
-        }
+            }//loops through linkedlist to add values and index to return message
+        }//checks if list is empty and will change return message
     return r;
     }//end toString method
     public boolean add(Object newItem){
@@ -44,13 +44,12 @@ public class MyLinkedList
             while(temp.getNext()!=null)
             {
                 temp=temp.getNext();
-            }
+            }//loops through temp to get to the end
             temp.setNext(new ListNode(newItem, null));
-        }
+        }//checks if list is empty
         else
-        {
             head = new ListNode(newItem, null);
-        }
+        
         size+=1;
         return true;
     }//end add method
@@ -59,11 +58,10 @@ public class MyLinkedList
             ListNode e = new ListNode(newItem, null);
             e.setNext(head);
             head = e;
-        }
+        }//checks if list is empty
         else
-        {
             head = new ListNode(newItem, null);
-        }
+        
         size+=1;
         return true;
     }//end addFirst method
@@ -84,9 +82,8 @@ public class MyLinkedList
             {
                 temp=temp.getNext();
                 e++;
-            }
-        }
-        size+=1;
+            }//loops through to set temp to node at index
+        }//runs if index is valid
         return temp.getValue();
 
     }//end get method
@@ -102,8 +99,8 @@ public class MyLinkedList
             {
                 temp=temp.getNext();
                 e++;
-            }
-        }
+            }//loops through to set temp to node at index
+        }//runs if index is valid
         Object r = temp.getValue();
         temp.setValue(newValue);
         return r;
@@ -121,8 +118,8 @@ public class MyLinkedList
             {
                 temp=temp.getNext();
                 e++;
-            }
-        }
+            }//loops through to set temp to node before index
+        }//runs if index is valid
         ListNode r = temp;
         temp = temp.getNext();
         r.setNext(temp.getNext());
@@ -133,8 +130,8 @@ public class MyLinkedList
     public Object removeFirst()
     {
         ListNode temp = head;
-        temp.setNext(null);
         head = head.getNext();
+        temp.setNext(null);
         size--;
         return temp.getValue();
     }//end removeLast method
@@ -144,8 +141,8 @@ public class MyLinkedList
         while(temp.getNext().getNext()!=null)
             {
                 temp=temp.getNext();
-            }
-        ListNode enz = temp;
+            }//loops through to set temp to the node before the last non-null node
+        ListNode enz = temp.getNext();
         temp.setNext(null);
         size--;
         return enz.getValue();
